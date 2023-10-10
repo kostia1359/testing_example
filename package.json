@@ -4,9 +4,21 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node src/server.js",
+    "test": "mocha --recursive --exit 'src/tests/**/*.test.js'"
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "@faker-js/faker": "^8.1.0",
+    "chai": "^4.3.10",
+    "joi": "^17.4.0",
+    "koa": "^2.13.1",
+    "koa-bodyparser": "^4.3.0",
+    "koa-router": "^12.0.0",
+    "mocha": "^10.2.0",
+    "supertest": "^6.3.3",
+    "uuid": "^8.3.2"
+  }
 }
