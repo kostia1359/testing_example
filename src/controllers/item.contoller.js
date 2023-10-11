@@ -1,11 +1,10 @@
-const Joi = require('joi');
-const { v4: uuidv4 } = require('uuid');
-const { itemRepository } = require('../repositories');
+const Joi = require("joi");
+const { itemRepository } = require("../repositories");
 
 const itemSchema = Joi.object({
   user_id: Joi.string().required(),
   name: Joi.string().required(),
-  price: Joi.number().integer().positive().required()
+  price: Joi.number().integer().positive().required(),
 });
 
 async function createItem(ctx) {
@@ -18,9 +17,12 @@ async function createItem(ctx) {
   }
 
   const { user_id, name, price } = ctx.request.body;
-  const id = uuidv4();
 
-  const newItem = itemRepository.createItem({ id, name, price, createdBy: user_id });
+  const newItem = itemRepository.createItem({
+    name,
+    price,
+    createdBy: user_id,
+  });
 
   ctx.body = newItem;
   ctx.status = 201;
@@ -37,7 +39,7 @@ async function getItemById(ctx) {
 
   if (!item) {
     ctx.status = 404;
-    ctx.body = { error: 'Item not found' };
+    ctx.body = { error: "Item not found" };
     return;
   }
 
@@ -47,5 +49,5 @@ async function getItemById(ctx) {
 module.exports = {
   createItem,
   getItems,
-  getItemById
+  getItemById,
 };

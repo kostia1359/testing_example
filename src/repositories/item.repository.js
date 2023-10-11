@@ -1,18 +1,20 @@
-const { Item } = require('../domain');
+const { Item } = require("../domain");
+const { v4: uuidv4 } = require("uuid");
 
 class ItemRepository {
   constructor() {
     this.items = [];
   }
 
-  createItem({ id, name, price, createdBy }) {
+  createItem({ name, price, createdBy }) {
+    const id = uuidv4();
     const newItem = new Item(id, name, price, createdBy);
     this.items.push(newItem);
     return newItem;
   }
 
   findById(itemId) {
-    return this.items.find(item => item.id === itemId);
+    return this.items.find((item) => item.id === itemId);
   }
 
   findAll() {
@@ -20,4 +22,4 @@ class ItemRepository {
   }
 }
 
-module.exports = new ItemRepository(); 
+module.exports = new ItemRepository();

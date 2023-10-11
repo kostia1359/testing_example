@@ -1,11 +1,10 @@
-const Joi = require('joi');
-const { v4: uuidv4 } = require('uuid');
-const { userRepository } = require('../repositories');
+const Joi = require("joi");
+const { userRepository } = require("../repositories");
 
 const userSchema = Joi.object({
   name: Joi.string().required(),
   email: Joi.string().email().required(),
-  money: Joi.number().integer().positive().required()
+  money: Joi.number().integer().positive().required(),
 });
 
 async function createUser(ctx) {
@@ -18,9 +17,8 @@ async function createUser(ctx) {
   }
 
   const { name, email, money } = ctx.request.body;
-  const id = uuidv4();
 
-  const newUser = userRepository.createUser({ id, name, email, money });
+  const newUser = userRepository.createUser({ name, email, money });
 
   ctx.body = newUser;
   ctx.status = 201;
@@ -37,7 +35,7 @@ async function getUserById(ctx) {
 
   if (!user) {
     ctx.status = 404;
-    ctx.body = { error: 'User not found' };
+    ctx.body = { error: "User not found" };
     return;
   }
 
@@ -47,5 +45,5 @@ async function getUserById(ctx) {
 module.exports = {
   createUser,
   getUsers,
-  getUserById
+  getUserById,
 };

@@ -1,9 +1,9 @@
-const {faker} = require('@faker-js/faker');
+const { faker } = require("@faker-js/faker");
 
 const buildUser = () => ({
-    name: faker.person.firstName(),
-    email: faker.internet.email(),
-    money: faker.finance.amount({min: 0, max: 1000, dec: 0}),
-  })
+  name: faker.person.firstName(),
+  email: faker.internet.email(),
+  money: faker.finance.amount({ min: 0, max: 1000, dec: 0 }),
+});
 
-  module.exports = buildUser
+module.exports = buildUser;

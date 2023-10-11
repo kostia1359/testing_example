@@ -1,4 +1,4 @@
-const { Order } = require('../domain');
+const { Order } = require("../domain");
 
 class OrderRepository {
   constructor() {
@@ -12,7 +12,7 @@ class OrderRepository {
   }
 
   findById(orderId) {
-    return this.orders.find(order => order.id === orderId);
+    return this.orders.find((order) => order.id === orderId);
   }
 
   findAll() {
@@ -20,4 +20,4 @@ class OrderRepository {
   }
 }
 
-module.exports = new OrderRepository(); 
+module.exports = new OrderRepository();

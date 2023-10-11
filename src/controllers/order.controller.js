@@ -1,11 +1,14 @@
-const Joi = require('joi');
-const { v4: uuidv4 } = require('uuid');
-const { orderRepository, userRepository, itemRepository } = require('../repositories');
+const Joi = require("joi");
+const {
+  orderRepository,
+  userRepository,
+  itemRepository,
+} = require("../repositories");
 
 const orderSchema = Joi.object({
   user_id: Joi.string().required(),
   item_id: Joi.string().required(),
-  quantity: Joi.number().integer().positive().required()
+  quantity: Joi.number().integer().positive().required(),
 });
 
 async function createOrder(ctx) {
@@ -24,13 +27,15 @@ async function createOrder(ctx) {
 
   if (!user || !item || user.money < quantity * item.price) {
     ctx.status = 400;
-    ctx.body = { error: 'Invalid order details' };
+    ctx.body = { error: "Invalid order details" };
     return;
   }
 
-  const id = uuidv4();
-  const newOrder = orderRepository.createOrder({ userId: user_id, itemId: item_id, quantity });
-
+  const newOrder = orderRepository.createOrder({
+    userId: user_id,
+    itemId: item_id,
+    quantity,
+  });
 
   user.money -= quantity * item.price;
 
@@ -49,16 +54,15 @@ async function getOrderById(ctx) {
 
   if (!order) {
     ctx.status = 404;
-    ctx.body = { error: 'Order not found' };
+    ctx.body = { error: "Order not found" };
     return;
   }
 
   ctx.body = order;
 }
 
-
 module.exports = {
   createOrder,
   getOrderById,
-  getOrders
+  getOrders,
 };

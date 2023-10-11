@@ -1,12 +1,9 @@
-const supertest = require('supertest');
-
+const supertest = require("supertest");
 
 const getUsers = async (app) => {
-    const getUsersResponse = await supertest(app)
-        .get('/users')
-        .expect(200);
+  const getUsersResponse = await supertest(app).get("/users").expect(200);
 
-    return getUsersResponse.body;
-}
+  return getUsersResponse.body;
+};
 
-module.exports = getUsers
+module.exports = getUsers;
