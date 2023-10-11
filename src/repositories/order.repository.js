@@ -1,4 +1,5 @@
 const { Order } = require("../domain");
+const { v4: uuidv4 } = require("uuid");
 
 class OrderRepository {
   constructor() {
@@ -6,7 +7,9 @@ class OrderRepository {
   }
 
   createOrder({ userId, itemId, quantity }) {
-    const newOrder = new Order(userId, itemId, quantity);
+    const id = uuidv4();
+
+    const newOrder = new Order(userId, itemId, quantity, id);
     this.orders.push(newOrder);
     return newOrder;
   }

@@ -23,6 +23,8 @@ const createUser = async (app, buildUser) => {
     ...userData,
     id: createdUser.id,
   });
+
+  return readCreatedUserResponse.body;
 };
 
 module.exports = createUser;
